@@ -72,5 +72,8 @@ public class VendingMachine {
             }
             System.out.println("Thank you and have a nice day :)");
         }
+
+        //  close input (java is erroring me because of this)
+        input.close();
     }
 }
