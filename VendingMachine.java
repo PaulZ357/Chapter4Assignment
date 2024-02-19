@@ -43,7 +43,7 @@ public class VendingMachine {
 
     }
 
-    public static void finish (int bills, double change) {
+    public static void finish (int bills, double change, Snack chosen) {
         Scanner input = new Scanner(System.in); //sets up scanner
 
         System.out.println("You put in $" + bills + ". Complete Transaction? Please type \"y\" for yes and \"n\" for no");
@@ -51,10 +51,11 @@ public class VendingMachine {
 
         if (confirm.equalsIgnoreCase("y")) {
             transaction(bills, change);
+            System.out.println(chosen.getName() + " is a great choice! Enjoy!");
         } else if (confirm.equalsIgnoreCase("n")) {
             System.out.println("You have been given a full refund, have a nice day!"); //end
         } else {
-           finish(bills, change);
+           finish(bills, change, chosen);
         }
 
         input.close();
@@ -102,14 +103,13 @@ public class VendingMachine {
 
         if (confirm.equalsIgnoreCase("y")) {
             transaction(bills, change);
+            System.out.println(chosen.getName() + " is a great choice! Enjoy!");
         } else if (confirm.equalsIgnoreCase("n")) {
             System.out.println("You have been given a full refund, have a nice day!"); //end
         } else {
             System.out.println("Incorrect selection, try again");
-           finish(bills, change);
+           finish(bills, change, chosen);
         }
-
-        System.out.println(chosen.getName() + " is a great choice! Enjoy!");
 
         //  close input (java is erroring me because of this)
         input.close();
