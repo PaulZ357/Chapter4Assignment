@@ -26,6 +26,40 @@ class Snack {
   }
 
 public class VendingMachine {
+
+    public static void transaction(int bills, double change) {
+
+        if (change < 0) {
+            System.out.println("Insufficient cash, it has been refunded. Try again");
+        } else {
+            if (change > 0) {
+                System.out.println("Your change is $"+ change);
+            } else {
+                System.out.println("You currently have no change");
+                
+            }
+            System.out.println("Thank you and have a nice day :)"); //end
+        }
+
+    }
+
+    public static void finish (int bills, double change) {
+        Scanner input = new Scanner(System.in); //sets up scanner
+
+        System.out.println("You put in $" + bills + ". Complete Transaction? Please type \"y\" for yes and \"n\" for no");
+        String confirm = input.nextLine();
+
+        if (confirm.equalsIgnoreCase("y")) {
+            transaction(bills, change);
+        } else if (confirm.equalsIgnoreCase("n")) {
+            System.out.println("You have been given a full refund, have a nice day!"); //end
+        } else {
+           finish(bills, change);
+        }
+
+        input.close();
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in); //sets up scanner
 
@@ -57,21 +91,25 @@ public class VendingMachine {
         double price = chosen.getPrice();
         System.out.println();
         System.out.println("You selected " + chosen.getName() + " which costs $" + price);
-        System.out.print("How much money would you like to put? We can only take $1 bills: ");
+        System.out.println("How much money would you like to put? We can only take $1 bills: ");
         int bills = input.nextInt();
 
         double change = bills-price;
-        if (change < 0) {
-            System.out.println("Insufficient cash.");
+
+        System.out.println("You put in $" + bills + ". Complete Transaction? Please type \"y\" for yes and \"n\" for no");
+        input.nextLine();
+        String confirm = input.nextLine();
+
+        if (confirm.equalsIgnoreCase("y")) {
+            transaction(bills, change);
+        } else if (confirm.equalsIgnoreCase("n")) {
+            System.out.println("You have been given a full refund, have a nice day!"); //end
         } else {
-            if (change > 0) {
-                System.out.println("Your change is $"+change);
-            } else {
-                System.out.println("You currently have no change");
-                
-            }
-            System.out.println("Thank you and have a nice day :)");
+            System.out.println("Incorrect selection, try again");
+           finish(bills, change);
         }
+
+        System.out.println(chosen.getName() + " is a great choice! Enjoy!");
 
         //  close input (java is erroring me because of this)
         input.close();
